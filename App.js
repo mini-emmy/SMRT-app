@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import Colors from './constants/colors.js';
+import { enableScreens } from 'react-native-screens';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
-import SarResponse from './components/SarResponse';
+import SarNavigation from './navigation/SarNavigation';
+
+enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -20,12 +23,8 @@ export default function App() {
     return <AppLoading startAsync={fetchFonts} onFinish={()=>setDataLoaded(true)} onError ={(err)=>console.log(err)}/>;
   }
 
-  return (
-    <View styles={styles.container}>
-    <Header title="SAR Response"/>
-      <SarResponse></SarResponse>
-    </View>
-  );
+  return   <SarNavigation/>
+
 }
 
 const styles = StyleSheet.create({

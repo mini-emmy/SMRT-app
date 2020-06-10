@@ -2,34 +2,34 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Colors from '../constants/colors.js';
 
-const SendButton= props =>{
+const SendButton = props => {
 
     return (
-      <TouchableOpacity onPress={props.onPress}>
-        <View style={styles.button}>
-            <Text style={styles.buttonText}>{props.children}</Text>
-        </View>
-    </TouchableOpacity>
-    )    
+        <TouchableOpacity onPress={props.onPress}>
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>{props.children}</Text>
+            </View>
+        </TouchableOpacity>
+    )
 };
 
 const styles = StyleSheet.create({
     button: {
-       backgroundColor:Colors.primary,
-       paddingVertical:12,
-       paddingHorizontal:30,
-       borderRadius:20,
-       marginVertical:20
-    
+        backgroundColor: Colors.primary,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        borderRadius: 20,
+        marginVertical: 20
+
     },
-    buttonText:{
-        color:'white',
-        fontFamily:'open-sans',
-        fontSize:20
+    buttonText: {
+        color: 'white',
+        fontFamily: 'open-sans',
+        fontSize: 20
 
     }
 });
 
 
-export default SendButton; 
+export default SendButton;
 
