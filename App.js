@@ -6,6 +6,15 @@ import { enableScreens } from 'react-native-screens';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import SarNavigation from './navigation/SarNavigation';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import messagesReducer from './store/reducers/message';
+
+const rootReducer = combineReducers({
+  messages: messagesReducer
+});
+
+const store = createStore(rootReducer);
 
 enableScreens();
 
@@ -23,7 +32,9 @@ export default function App() {
     return <AppLoading startAsync={fetchFonts} onFinish={()=>setDataLoaded(true)} onError ={(err)=>console.log(err)}/>;
   }
 
-  return   <SarNavigation/>
+  return     (<Provider store={store}>
+    <SarNavigation/>
+    </Provider>)
 
 }
 
