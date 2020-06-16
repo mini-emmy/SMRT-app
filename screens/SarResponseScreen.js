@@ -13,8 +13,7 @@ const SarResponseScreen = props => {
 
     return (
         <View style={styles.sarView}>
-            <Input hint="Enter ETA" style={styles.eta}>
-            </Input>
+            <Input placeholder="Enter ETA" style={styles.eta}/>   
             <SendButton onPress={sendSARHandler}>SEND SAR A</SendButton>
         </View>
     )

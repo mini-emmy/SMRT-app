@@ -6,15 +6,27 @@ import { enableScreens } from 'react-native-screens';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import SarNavigation from './navigation/SarNavigation';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 import messagesReducer from './store/reducers/message';
+import settingsReducer from './store/reducers/settings';
+import { init } from './helpers/db';
 
-const rootReducer = combineReducers({
-  messages: messagesReducer
+init().then(()=>{
+})
+.catch(err => {
+  console.log('init db failed');
+  console.log(err);
 });
 
-const store = createStore(rootReducer);
+
+const rootReducer = combineReducers({
+  messages: messagesReducer,
+  settings: settingsReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 enableScreens();
 

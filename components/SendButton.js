@@ -6,7 +6,7 @@ const SendButton = props => {
 
     return (
         <TouchableOpacity onPress={props.onPress}>
-            <View style={styles.button}>
+            <View style={{...props.style, ...styles.button}}>
                 <Text style={styles.buttonText}>{props.children}</Text>
             </View>
         </TouchableOpacity>
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontFamily: 'open-sans',
-        fontSize: 20
+        fontSize: 20,
+        textAlign:'center'
 
     }
 });
