@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SarResponseScreen from '../screens/SarResponseScreen';
 import GetMessageScreen from '../screens/GetMessageScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import CustomMessageScreen from '../screens/CustomMessageScreen';
 import Colors from '../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
@@ -30,7 +31,9 @@ const defaultStackNavOptions = {
 
 const SARNavigator = createStackNavigator({
     SAR: SarResponseScreen,
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
+    Custom: CustomMessageScreen
+
 },
 {
     defaultNavigationOptions: defaultStackNavOptions
@@ -44,6 +47,7 @@ const LocationNavigator = Platform.OS === 'android' ? createStackNavigator({
 
         defaultNavigationOptions: defaultStackNavOptions
     }) : createStackNavigator({
+        Custom:CustomMessageScreen,
         Settings: SettingsScreen
     }, {
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Colors from '../constants/colors.js';
 
-const SendButton = props => {
+const DeleteMessage = props => {
 
     return (
         <TouchableOpacity onPress={props.onPress} style={props.style}>
@@ -15,7 +15,7 @@ const SendButton = props => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.grey,
         paddingVertical: 12,
         paddingHorizontal: 30,
         borderRadius: 20,
@@ -32,5 +32,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default SendButton;
+export default DeleteMessage;
 
