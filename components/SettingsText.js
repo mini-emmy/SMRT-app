@@ -11,7 +11,7 @@ const SettingsText = props => {
 const styles = StyleSheet.create({
   text: {
     fontFamily:'open-sans',
-    fontSize:16,
+    fontSize:20,
     color:Color.primary
   }
 }

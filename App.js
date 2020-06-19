@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import messagesReducer from './store/reducers/message';
 import settingsReducer from './store/reducers/settings';
+import receivedSMSReducer from './store/reducers/receivedSMS';
 import { init } from './helpers/db';
 
 init().then(()=>{
@@ -23,7 +24,8 @@ init().then(()=>{
 
 const rootReducer = combineReducers({
   messages: messagesReducer,
-  settings: settingsReducer
+  settings: settingsReducer,
+  receivedSMS: receivedSMSReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

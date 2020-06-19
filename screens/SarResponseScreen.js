@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import SendButton from '../components/SendButton';
 import Input from '../components/Input';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SendSMS } from '../helpers/smsSender';
+import { useSelector, useDispatch } from 'react-redux';
+import * as settingsActions from '../store/actions/settings';
+
 
 const SarResponseScreen = props => {
+    const dispatch = useDispatch();
+    const [eta, setEta] = useState('');        
+    const sarNUM = useSelector(state => state.settings.SARnumber);
+
+    useEffect(() => {
+        dispatch(settingsActions.getSARnumber());
+    }, [dispatch]);
 
     let customLink;
     if (Platform.OS === 'android') {
 
-        customLink =  <TouchableOpacity onPress={()=>{props.navigation.navigate('Custom')}}><Text>Other message...</Text></TouchableOpacity> 
+        customLink = <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
 
     }
 
     const sendSARHandler = () => {
-        //implememnt sms functionality
+        const message = "SAR A " + eta;
+        SendSMS(sarNUM, message);
+        setEta('');
     }
 
     return (
         <View style={styles.sarView}>
-            <Input placeholder="Enter ETA" style={styles.eta} />
+            <Input value={eta} onChangeText={(value) => setEta(value)} placeholder="Enter ETA" style={styles.eta} />
             <SendButton onPress={sendSARHandler}>SEND SAR A</SendButton>
             {customLink}
         </View>

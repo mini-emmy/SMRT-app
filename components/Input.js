@@ -13,6 +13,7 @@ const styles=StyleSheet.create({
         borderBottomWidth:1,
         marginVertical:10,
         textAlign: 'center',
+        fontSize:18,
     }
 })
 export default Input; 

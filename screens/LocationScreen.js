@@ -5,15 +5,14 @@ import HeaderButton from '../components/HeaderButton';
 import { useSelector } from 'react-redux';
 import TextMessage from '../components/TextMessage';
 
-const GetMessageScreen = props => {
+const LocationScreen = props => {
 
-  const messages = useSelector(state => state.messages.messages);
+  const messages = useSelector(state => state.receivedSMS.ReceivedSMS);
 
   return <ScrollView contentContainerStyle={styles.list}>{messages.map((message, index) => <TextMessage key={message.id} smsMessage={message} />)}</ScrollView>;
 }
 
-GetMessageScreen.navigationOptions = navData => {
-
+LocationScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Locate',
     headerRight: () => (
@@ -47,4 +46,4 @@ const styles = StyleSheet.create({
 }
 );
 
-export default GetMessageScreen; 
+export default LocationScreen; 

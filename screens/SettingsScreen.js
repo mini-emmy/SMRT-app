@@ -8,7 +8,7 @@ import * as settingsActions from '../store/actions/settings';
 
 const SettingsScreen = props => {
   const SARnumber = useSelector(state => state.settings.SARnumber);
-  const [SARNum, setSarNum]=useState(SARnumber);
+  const [SARNum, setSarNum] = useState(SARnumber);
 
   const dispatch = useDispatch();
 
@@ -28,8 +28,8 @@ const SettingsScreen = props => {
 
   return (<ScrollView keyboardShouldPersistTaps='handled'><View style={styles.container}>
     <View style={styles.settings}>
-      <SettingsText style={styles.textField}>SAR Response: </SettingsText>
-      <Input value={SARNum} placeholder="Enter sarcall response number"
+      <SettingsText style={styles.textField}>SAR Response number: </SettingsText>
+      <Input value={SARNum} placeholder="Enter response number"
         onChangeText={numberChanged}
         keyboardType="number-pad" style={styles.input}></Input>
     </View>
@@ -50,26 +50,27 @@ const styles = StyleSheet.create({
     flex: 1
   },
   settings: {
-    marginTop:30,
-    flexDirection: "row",
-    justifyContent: "space-around",
+    marginTop: 30,
+    justifyContent: "space-evenly",
     alignItems: 'center',
-    marginHorizontal:'10%'
+    marginHorizontal: '5%'
   },
   textField: {
     textAlign: 'left',
-    width:'50%'
+    width: '90%',
+    marginVertical: 10
   },
-  input:{
-      width: '50%'
+  input: {
+    width: '90%',
+    marginVertical: 10
   },
   sendButton: {
-    width:150
+    width: 150
   },
   settingSave: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginHorizontal:'10%'
+    marginHorizontal: '10%'
   }
 }
 );

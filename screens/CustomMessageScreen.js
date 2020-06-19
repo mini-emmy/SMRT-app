@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View, ScrollView, Text, Keyboard, Button } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View, ScrollView, Text, Keyboard, Button } from 'react-native';
 import SendButton from '../components/SendButton';
 import Input from '../components/Input';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -7,6 +7,7 @@ import HeaderButton from '../components/HeaderButton';
 import { useSelector, useDispatch } from 'react-redux';
 import * as messageActions from '../store/actions/message';
 import DeleteMessage from '../components/DeleteMessage';
+import { SendSMS } from '../helpers/smsSender';
 
 
 const CustomMessageScreen = props => {
@@ -15,6 +16,7 @@ const CustomMessageScreen = props => {
     const [showNewMessageBox, setShowNewMessageBox] = useState(false);
     const [deleteMode, setDeleteMode] = useState(false);
     const messages = useSelector(state => state.messages.messages);
+    const sarNum = useSelector(state => state.settings.SARnumber);
 
     useEffect(() => {
         dispatch(messageActions.getSARMessages());
@@ -23,12 +25,12 @@ const CustomMessageScreen = props => {
 
 
     const sendSARHandler = (message) => {
-        console.log("message send " + message);
+        SendSMS(sarNum, message);
     }
 
     const saveCustomMessage = () => {
         Keyboard.dismiss();
-        if (!messages.includes(newMessage)) {
+        if (!messages.includes(newMessage) || newMessage==='') {
             dispatch(messageActions.addSARMessage(newMessage));
         }
         setShowNewMessageBox(false);
@@ -40,6 +42,11 @@ const CustomMessageScreen = props => {
 
     }
 
+    const closeMessageBox = () => {
+        Keyboard.dismiss();
+        setShowNewMessageBox(false);
+    }
+
     let smsMessages;
 
     if (deleteMode) {
@@ -47,7 +54,7 @@ const CustomMessageScreen = props => {
     }
 
     else {
-        smsMessages = messages.map((item, index) => { return <SendButton style={styles.messageButton} key={item} onPress={saveCustomMessage.bind(this, item)}> {item} </SendButton> });
+        smsMessages = messages.map((item, index) => { return <SendButton style={styles.messageButton} key={item} onPress={sendSARHandler.bind(this, item)}> {item} </SendButton> });
     }
 
     let customMessageBox;
@@ -55,8 +62,11 @@ const CustomMessageScreen = props => {
     if (showNewMessageBox) {
 
         customMessageBox = <View style={styles.messageCard}>
-            <Input onChangeText={(value) => setNewMessage(value)} placeholder="Enter you own message" style={styles.input}></Input>
-            <SendButton onPress={saveCustomMessage}>SAVE</SendButton>
+            <TextInput multiline={true} onChangeText={(value) => setNewMessage(value)} placeholder="Enter you own message" style={styles.input}></TextInput>
+            <View style={styles.buttonArea}>
+            <SendButton style={styles.saveButton} onPress={closeMessageBox}>CANCEL</SendButton>
+            <SendButton style={styles.saveButton} onPress={saveCustomMessage}>SAVE</SendButton>
+            </View>
         </View>
     }
 
@@ -120,9 +130,24 @@ flex:1
 
     },
     input: {
+        height:200,
+        fontSize:18
 
     },
+    buttonArea:{
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginHorizontal:'7%'
+
+    },
+    saveButton:{
+        marginHorizontal:10
+
+    },
+
     messageCard: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
         shadowColor: 'black',
         shadowOpacity: 0.26,
         shadowOffset: { width: 0, height: 2 },
@@ -130,7 +155,8 @@ flex:1
         elevation: 5,
         borderRadius: 10,
         backgroundColor: "white",
-        margin: 20
+        margin:20,
+        padding:10
     }
 }
 );

@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SarResponseScreen from '../screens/SarResponseScreen';
-import GetMessageScreen from '../screens/GetMessageScreen';
+import LocationScreen from '../screens/LocationScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CustomMessageScreen from '../screens/CustomMessageScreen';
 import Colors from '../constants/colors';
@@ -40,7 +40,7 @@ const SARNavigator = createStackNavigator({
 });
 
 const LocationNavigator = Platform.OS === 'android' ? createStackNavigator({
-    Location: GetMessageScreen,
+    Location: LocationScreen,
     Settings: SettingsScreen
 },
     {
