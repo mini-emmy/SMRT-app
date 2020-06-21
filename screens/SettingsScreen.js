@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, View, Keyboard } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, Keyboard } from 'react-native';
 import Input from '../components/Input';
 import SettingsText from '../components/SettingsText';
 import SendButton from '../components/SendButton';
@@ -26,16 +26,19 @@ const SettingsScreen = props => {
     setSarNum(inputText.replace(/[^0-9]/g, ''));
   };
 
-  return (<ScrollView keyboardShouldPersistTaps='handled'><View style={styles.container}>
-    <View style={styles.settings}>
-      <SettingsText style={styles.textField}>SAR Response number: </SettingsText>
-      <Input value={SARNum} placeholder="Enter response number"
-        onChangeText={numberChanged}
-        keyboardType="number-pad" style={styles.input}></Input>
-    </View>
+  return (<View style={styles.screen}><ScrollView keyboardShouldPersistTaps='handled'>
+    <View style={styles.container}>
+      <View style={styles.settings}>
+        <SettingsText style={styles.textField}>SAR Response number: </SettingsText>
+        <Input value={SARNum} placeholder="Enter response number"
+          onChangeText={numberChanged}
+          keyboardType="number-pad" style={styles.input}></Input>
+      </View>
   </View>
-    <View style={styles.settingSave}><SendButton style={styles.sendButton} onPress={storeSARnumber.bind(this, SARNum)}>SAVE</SendButton></View>
-  </ScrollView>)
+      <View style={styles.settingSave}><SendButton style={styles.sendButton} onPress={storeSARnumber.bind(this, SARNum)}>SAVE</SendButton></View>
+  </ScrollView>
+  <View style={styles.creditSection}><Text style={styles.credit}>Created my free logo at LogoMakr.com</Text></View>
+  </View>)
 }
 
 SettingsScreen.navigationOptions = navData => {
@@ -46,8 +49,11 @@ SettingsScreen.navigationOptions = navData => {
 }
 
 const styles = StyleSheet.create({
+  screen:{
+    height:'100%'
+  },
   container: {
-    flex: 1
+    flex: 1,
   },
   settings: {
     marginTop: 30,
@@ -71,6 +77,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginHorizontal: '10%'
+  },
+  creditSection: {
+    justifyContent: "flex-end",
+  },
+  credit: {
+    textAlign: 'center',
+    fontFamily: 'open-sans',
+    fontSize: 12,
+    padding: 8,
+    color: 'grey'
+
   }
 }
 );

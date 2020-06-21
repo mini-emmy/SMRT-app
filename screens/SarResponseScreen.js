@@ -20,11 +20,11 @@ const SarResponseScreen = props => {
     }, [dispatch]);
 
     let customLink;
-    if (Platform.OS === 'android') {
+    // if (Platform.OS === 'android') {
 
-        customLink = <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
+    //     customLink = <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
 
-    }
+    // }
 
     const sendSARHandler = () => {
         const message = "SAR A " + eta;

@@ -39,7 +39,6 @@ export const insertSetting = (settingsTitle, settingsText) => {
             tx.executeSql('INSERT OR REPLACE INTO sarsettings (Id, settingsTitle, settingsText) VALUES ((SELECT id from sarsettings WHERE settingsTitle = ?),?,?);',
                 [settingsTitle, settingsTitle, settingsText],
                 (_, result) => {
-                    console.log(result)
                     resolve(result);
                 },
                 (_, err) => {
@@ -82,7 +81,6 @@ export const addMessage = (message) => {
                     resolve(result);
                 },
                 (_, err) => {
-                    console.log(err)
                     reject(err);
                 }
             );
@@ -99,7 +97,6 @@ export const deleteMessage = (message) => {
             tx.executeSql('DELETE FROM sarmessages WHERE message=?;',
                 [message],
                 (_, result) => {
-                    console.log(result)
                     resolve(result);
                 },
                 (_, err) => {
@@ -120,7 +117,6 @@ export const getMessages = () => {
             tx.executeSql('SELECT * FROM sarmessages;',
                 [],
                 (_, result) => {
-                    console.log(result)
                     resolve(result);
                 },
                 (_, err) => {

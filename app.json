@@ -4,14 +4,13 @@
     "slug": "MR-SAR",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/callout.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/callout.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +21,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier":"com.hoyes.emmy",
+      "buildNumber":"1.0.0",
+      "supportsTablet": false
+    },
+    "android":{
+      "package":"com.hoyes.emmy",
+      "versionCode":1,
+      "adaptiveIcon":{
+        "foregroundImage":"./assets/callout.png",
+        "backgroundColor":"#ffffff"
+      },
+      "permissions":[]
     }
   }
 }

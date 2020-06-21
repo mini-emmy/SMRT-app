@@ -35,19 +35,20 @@ const SARNavigator = createStackNavigator({
     Custom: CustomMessageScreen
 
 },
-{
-    defaultNavigationOptions: defaultStackNavOptions
-});
+    {
+        defaultNavigationOptions: defaultStackNavOptions
+    });
 
 const LocationNavigator = Platform.OS === 'android' ? createStackNavigator({
-    Location: LocationScreen,
+    Custom: CustomMessageScreen,
+    //Location: LocationScreen,
     Settings: SettingsScreen
 },
     {
 
         defaultNavigationOptions: defaultStackNavOptions
     }) : createStackNavigator({
-        Custom:CustomMessageScreen,
+        Custom: CustomMessageScreen,
         Settings: SettingsScreen
     }, {
 
@@ -68,10 +69,10 @@ const tabScreenConfig = {
     Location: {
         screen: LocationNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-locate' size={25} color={tabInfo.tintColor} />;
+                return <Ionicons name='ios-text' size={25} color={tabInfo.tintColor} />;
             },
             tabBarColor: Colors.primary,
-            tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }}>Locate</Text> : 'Settings'
+            tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }}>Custom</Text> : 'Custom'
         }
     }
 }

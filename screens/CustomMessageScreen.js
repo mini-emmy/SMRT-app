@@ -87,7 +87,7 @@ const CustomMessageScreen = props => {
 
 CustomMessageScreen.navigationOptions = navData => {
     return {
-        headerTitle: 'SAR Custom Response',
+        headerTitle: 'Custom Response',
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
