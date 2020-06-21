@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Alert, Text, View, Platform } from 'react-native';
 import SendButton from '../components/SendButton';
 import Input from '../components/Input';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -12,8 +12,8 @@ import * as settingsActions from '../store/actions/settings';
 
 const SarResponseScreen = props => {
     const dispatch = useDispatch();
-    const [eta, setEta] = useState('');        
-    const sarNUM = useSelector(state => state.settings.SARnumber);
+    const [eta, setEta] = useState('');
+    const sarNum = useSelector(state => state.settings.SARnumber);
 
     useEffect(() => {
         dispatch(settingsActions.getSARnumber());
@@ -27,9 +27,22 @@ const SarResponseScreen = props => {
     // }
 
     const sendSARHandler = () => {
-        const message = "SAR A " + eta;
-        SendSMS(sarNUM, message);
-        setEta('');
+        if (!sarNum) {  
+            Alert.alert(
+                'Before you can send message',
+                'Please specify the SAR Response number under settings to send sms.',
+                [
+                    { text: 'OK', onPress: () => props.navigation.navigate('Settings') }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        else {           
+            const message = "SAR A " + eta;
+            SendSMS(sarNum, message);
+            setEta('');
+        }
     }
 
     return (

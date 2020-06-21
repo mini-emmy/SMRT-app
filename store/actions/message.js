@@ -6,7 +6,6 @@ export const LOAD_MESSAGES = 'LOAD_MESSAGES';
 
 export const addSARMessage = (message) => {
     return async dispatch => {
-        console.log("add Sarmessage" + message);
         try {
             const dbResult = await addMessage(message);
         } catch (err) {
@@ -20,7 +19,6 @@ export const addSARMessage = (message) => {
 
 export const deleteSARMessage = (message) => {
     return async dispatch => {
-        console.log(message);
         try {
             const dbResult = await deleteMessage(message);
         } catch (err) {
@@ -39,7 +37,6 @@ export const getSARMessages = () => {
             const dbResult = await getMessages();
             const existingMessages = [];
             dbResult.rows._array.map(item => existingMessages.push(item.message))
-            console.log(existingMessages);
             dispatch({ type: LOAD_MESSAGES, messages: existingMessages })
 
 

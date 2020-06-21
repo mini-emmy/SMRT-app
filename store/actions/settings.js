@@ -4,7 +4,6 @@ export const SET_SAR_NUMBER = 'SET_SAR_NUMBER';
 
 export const saveSARnumber = (SARNum) => {
     return async dispatch => {
-        console.log(SARNum)
         try {
             const dbResult = await insertSetting('SARnumber', SARNum);
         } catch (err) {

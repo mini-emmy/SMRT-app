@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, View, ScrollView, Text, Keyboard, Button } from 'react-native';
+import { StyleSheet, Alert, TextInput, TouchableOpacity, View, ScrollView, Text, Keyboard, Button } from 'react-native';
 import SendButton from '../components/SendButton';
 import Input from '../components/Input';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -25,12 +25,25 @@ const CustomMessageScreen = props => {
 
 
     const sendSARHandler = (message) => {
-        SendSMS(sarNum, message);
+        if (!sarNum) {   // Works on both Android and iOS}
+            Alert.alert(
+                'Error',
+                'Please specify the SAR Response number under settings to send sms.',
+                [
+                    { text: 'OK', onPress: () => props.navigation.navigate('Settings') }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        else {
+            SendSMS(sarNum, message);
+        }
     }
 
     const saveCustomMessage = () => {
         Keyboard.dismiss();
-        if (!messages.includes(newMessage) || newMessage==='') {
+        if (!messages.includes(newMessage) || newMessage === '') {
             dispatch(messageActions.addSARMessage(newMessage));
         }
         setShowNewMessageBox(false);
@@ -64,18 +77,18 @@ const CustomMessageScreen = props => {
         customMessageBox = <View style={styles.messageCard}>
             <TextInput multiline={true} onChangeText={(value) => setNewMessage(value)} placeholder="Enter you own message" style={styles.input}></TextInput>
             <View style={styles.buttonArea}>
-            <SendButton style={styles.saveButton} onPress={closeMessageBox}>CANCEL</SendButton>
-            <SendButton style={styles.saveButton} onPress={saveCustomMessage}>SAVE</SendButton>
+                <SendButton style={styles.saveButton} onPress={closeMessageBox}>CANCEL</SendButton>
+                <SendButton style={styles.saveButton} onPress={saveCustomMessage}>SAVE</SendButton>
             </View>
         </View>
     }
 
     return (<View style={styles.screen}>
-         {customMessageBox}
+        {customMessageBox}
         <ScrollView contentContainerStyle={styles.list}>
-        {smsMessages}
+            {smsMessages}
         </ScrollView>
-     
+
         <View style={styles.editButtons}>
             <TouchableOpacity onPress={() => { setShowNewMessageBox(true); }}><Text>Add message...</Text></TouchableOpacity>
             <TouchableOpacity onPress={() => { setDeleteMode(true); }}><Text>Delete message...</Text></TouchableOpacity>
@@ -106,7 +119,7 @@ CustomMessageScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
 
-flex:1
+        flex: 1
     },
     list: {
         padding: 20
@@ -130,18 +143,18 @@ flex:1
 
     },
     input: {
-        height:200,
-        fontSize:18
+        height: 200,
+        fontSize: 18
 
     },
-    buttonArea:{
+    buttonArea: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginHorizontal:'7%'
+        marginHorizontal: '7%'
 
     },
-    saveButton:{
-        marginHorizontal:10
+    saveButton: {
+        marginHorizontal: 10
 
     },
 
@@ -155,8 +168,8 @@ flex:1
         elevation: 5,
         borderRadius: 10,
         backgroundColor: "white",
-        margin:20,
-        padding:10
+        margin: 20,
+        padding: 10
     }
 }
 );
