@@ -9,6 +9,10 @@ const LocationScreen = props => {
 
   const messages = useSelector(state => state.receivedSMS.ReceivedSMS);
 
+  includeLocation = (message) => {
+
+  }
+
   return <ScrollView contentContainerStyle={styles.list}>{messages.map((message, index) => <TextMessage key={message.id} smsMessage={message} />)}</ScrollView>;
 }
 
