@@ -1,6 +1,7 @@
 export class Location {
-    constructor(text, element) {
-        this.text = text;
+    constructor(start, end, element) {
+        this.indexStart = start;
+        this.indexEnd = end;
         this.element=element;
     }
 

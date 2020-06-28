@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Keyboard, ScrollView, Text, View, TextInput } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { useSelector } from 'react-redux';
@@ -10,28 +10,57 @@ import SendButton from '../components/SendButton';
 
 const LocationScreen = props => {
 
+
+
   const messages = useSelector(state => state.receivedSMS.ReceivedSMS);
-  const [message, setMessage]=useState('');
-  const [parsedMessage, setParsedMessage]=useState('');
+  const [message, setMessage] = useState('');
+  const [showLocations, setShowLocations] = useState(false);
 
-  const getLocation = (message) => {
-    const locations = LocationParse(message);
+  let locationView = <TextInput multiline={true} value={message} onChangeText={(value) => setMessage(value)} placeholder="Copy and paste message" style={styles.input}></TextInput>;
 
-    for (i = 0; i < locations.length; i++) {
-      message = message.replace(locations[i].text, locations[i].element);
+  const findLocations = () => {
+    Keyboard.dismiss();
+    setShowLocations(true);
+  }
+
+  const clearLocation = () => {
+    Keyboard.dismiss();
+    setMessage('');
+    setShowLocations(false);
+  }
+
+  if (showLocations) {
+    let newMessage = message;
+    const locations = LocationParse(newMessage);
+    locations.sort((a, b) => parseFloat(a.start) - parseFloat(b.start));
+
+
+    let locationsSection = [];
+
+    let start = 0;
+
+    for (let i = 0; i < locations.length; i++) {
+      let partMessage = <Text style={styles.locationMessage} key={start}>{newMessage.substring(start, locations[i].indexStart)}</Text>
+      locationsSection.push(partMessage);
+      locationsSection.push(locations[i].element);
+      start = locations[i].indexEnd;
     }
 
-    setParsedMessage(<View style={styles.messageCard}><Text style={styles.smsText}>{message}</Text></View>);
+    let lastMessagePart = <Text style={styles.locationMessage} key={start}>{newMessage.substring(start)}</Text>
+    locationsSection.push(lastMessagePart);
+    locationView = <View>{locationsSection.map((item) => { return item })}</View>
 
   }
-  return <ScrollView>
+
+
+  return <ScrollView keyboardShouldPersistTaps='always'>
     <View style={styles.messageCard}>
-      <TextInput multiline={true} onChangeText={(value) => setMessage(value)} placeholder="Copy and paste message" style={styles.input}>{messages[0].text}</TextInput>
+      {locationView}
     </View>
-    <SendButton onPress={getLocation}>Find Locations</SendButton>
-    <View><Text>{parsedMessage}</Text></View>
+    <SendButton style={styles.locButton} onPress={findLocations}>Find Locations</SendButton>
+    <SendButton style={styles.locButton} onPress={clearLocation}>Clear</SendButton>
   </ScrollView>
-  // return <ScrollView contentContainerStyle={styles.list}>{messages.map((message, index) => includeLocation(message))}</ScrollView>;
+
 }
 
 LocationScreen.navigationOptions = navData => {
@@ -66,18 +95,26 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
     backgroundColor: "white",
-    margin: 20
+    margin: 20,
+    padding: 10
 
   },
-  smsText: {
-    fontFamily: 'open-sans',
-    fontSize: 18,
-    padding: 15
+  locButton: {
+    marginHorizontal: 20
+  },
+  locations: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+
   },
   input: {
     height: 200,
     fontSize: 18
 
+  },
+  locationMessage: {
+    fontSize: 18
   },
   list: {
     alignItems: 'center',

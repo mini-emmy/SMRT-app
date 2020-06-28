@@ -11,6 +11,7 @@
     "@expo/vector-icons": "^10.2.0",
     "@react-native-community/masked-view": "0.1.6",
     "expo": "~37.0.3",
+    "expo-sms": "~8.1.0",
     "expo-sqlite": "^8.1.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -29,8 +30,7 @@
     "react-navigation-tabs": "^2.8.13",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "expo-sms": "~8.1.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",
