@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, IntentAndroid, Text, StyleSheet, Linking } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Linking } from 'react-native';
 import { Location } from '../model/location';
 import { W3W_KEY } from '../helpers/keys';
 
@@ -87,7 +87,7 @@ const findWhat3Words = (loc, message) => {
     var regex = /[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}/i
     const location = regex.exec(message);
     if (location) {
-        const element = <Text key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])} style={styles.link}>{location[0]}</Text>;//<TouchableOpacity onPress={OpenMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+        const element = <TouchableOpacity  key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;//<TouchableOpacity onPress={OpenMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
         const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
         loc.push(address);
     }
@@ -99,7 +99,7 @@ const findGridReference = (loc, message) => {
     var regex = /([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3})/;
     const location = regex.exec(message);
     if (location) {
-        const element = <Text key={location[0]} onPress={openMappingFromGR.bind(this, location[0])} style={styles.link}>{location[0]}</Text>;
+        const element = <TouchableOpacity key={location[0]} onPress={openMappingFromGR.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
         const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
         loc.push(address);
     }

@@ -10,17 +10,16 @@ import SendButton from '../components/SendButton';
 
 const LocationScreen = props => {
 
-
-
-  const messages = useSelector(state => state.receivedSMS.ReceivedSMS);
   const [message, setMessage] = useState('');
   const [showLocations, setShowLocations] = useState(false);
 
   let locationView = <TextInput multiline={true} value={message} onChangeText={(value) => setMessage(value)} placeholder="Copy and paste message" style={styles.input}></TextInput>;
 
   const findLocations = () => {
+    if(message!==''){
     Keyboard.dismiss();
     setShowLocations(true);
+    }
   }
 
   const clearLocation = () => {
