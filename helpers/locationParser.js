@@ -12,6 +12,8 @@ const LocationParse = (message) => {
 
     findGridReference(locations, message);
 
+    findPostCodes(locations, message);
+
     return locations;
 
 }
@@ -82,27 +84,63 @@ const getCoordinates = (coord, loc) => {
 
 }
 
+const openMappingFromPostCode = (loc) => {
+    fetch('https://postcodes.io/postcodes/' + loc)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            Linking.openURL('geo:' + responseJson.result.latitude + ',' + responseJson.result.longitude);
+        })
+        .catch((error) => {
+            alert(JSON.stringify(error));
+        });
 
-const findWhat3Words = (loc, message) => {
-    var regex = /[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}/i
-    const location = regex.exec(message);
-    if (location) {
-        const element = <TouchableOpacity  key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;//<TouchableOpacity onPress={OpenMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
-        const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
-        loc.push(address);
-    }
 
 }
 
-const findGridReference = (loc, message) => {
 
-    var regex = /([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3})/;
-    const location = regex.exec(message);
-    if (location) {
-        const element = <TouchableOpacity key={location[0]} onPress={openMappingFromGR.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
-        const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
-        loc.push(address);
-    }
+const findWhat3Words = (locArray, message) => {
+    var regex = /[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}/ig
+    var location;
+    do {
+        location = regex.exec(message);
+        if (location) {
+            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
+            locArray.push(address);
+        }
+    } while (location);
+
+
+}
+
+const findGridReference = (locArray, message) => {
+
+    var regex = /([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3})/g;
+    var location;
+    do {
+        location = regex.exec(message);
+        if (location) {
+            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromGR.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
+            locArray.push(address);
+        }
+    } while (location);
+
+}
+
+findPostCodes = (locArray, message) => {
+    var regex = /(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))/g;
+    var location;
+    do {
+        location = regex.exec(message);
+        if (location) {
+            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromPostCode.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
+            locArray.push(address);
+        }
+    } while (location);
+
 
 }
 
