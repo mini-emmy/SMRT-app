@@ -7,7 +7,7 @@
       "android"
     ],
     "sdkVersion":"37.0.0",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/callout_adaptive.png",
     "splash": {
@@ -23,12 +23,12 @@
     ],
     "ios": {
       "bundleIdentifier":"com.hoyes.callout",
-      "buildNumber":"1.1.0",
+      "buildNumber":"1.1.1",
       "supportsTablet": false
     },
     "android":{
       "package":"com.hoyes.callout",
-      "versionCode":2,
+      "versionCode":3,
       "adaptiveIcon":{
         "foregroundImage":"./assets/callout_adaptive.png",
         "backgroundColor":"#ffffff"

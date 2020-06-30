@@ -20,6 +20,8 @@ const LocationParse = (message) => {
 
 //not so elegant to nest the promises, have a look to use nicer to read way of doing it.
 const openMappingFromW3W = (loc) => {
+    loc = loc.replace(/,/g,".");
+    loc = loc.replace(/\//g,".");
     fetch('https://api.what3words.com/v3/autosuggest?input=' + loc + '&clip-to-country=GB&key=' + W3W_KEY)
         .then((response) => response.json())
         .then((responseJson) => {
@@ -85,6 +87,7 @@ const getCoordinates = (coord, loc) => {
 }
 
 const openMappingFromPostCode = (loc) => {
+    loc=loc.replace(' ','');
     fetch('https://postcodes.io/postcodes/' + loc)
         .then((response) => response.json())
         .then((responseJson) => {
@@ -100,7 +103,7 @@ const openMappingFromPostCode = (loc) => {
 
 
 const findWhat3Words = (locArray, message) => {
-    var regex = /[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}/ig
+    var regex = /[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・,/.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・,/.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}/ig
     var location;
     do {
         location = regex.exec(message);
