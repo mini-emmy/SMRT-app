@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "MR-SAR",
+    "name": "CALLOUT",
     "slug": "callout-helper",
     "platforms": [
       "ios",
       "android"
     ],
     "sdkVersion":"37.0.0",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "orientation": "portrait",
-    "icon": "./assets/callout.png",
+    "icon": "./assets/callout_adaptive.png",
     "splash": {
-      "image": "./assets/callout.png",
+      "image": "./assets/callout_adaptive.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,14 +23,14 @@
     ],
     "ios": {
       "bundleIdentifier":"com.hoyes.callout",
-      "buildNumber":"1.0.0",
+      "buildNumber":"1.1.1",
       "supportsTablet": false
     },
     "android":{
       "package":"com.hoyes.callout",
-      "versionCode":1,
+      "versionCode":3,
       "adaptiveIcon":{
-        "foregroundImage":"./assets/callout.png",
+        "foregroundImage":"./assets/callout_adaptive.png",
         "backgroundColor":"#ffffff"
       },
       "permissions":[]

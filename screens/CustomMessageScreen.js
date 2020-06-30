@@ -75,7 +75,7 @@ const CustomMessageScreen = props => {
     if (showNewMessageBox) {
 
         customMessageBox = <View style={styles.messageCard}>
-            <TextInput multiline={true} onChangeText={(value) => setNewMessage(value)} placeholder="Enter you own message" style={styles.input}></TextInput>
+            <TextInput multiline={true} onChangeText={(value) => setNewMessage(value)} placeholder="Enter your own message" style={styles.input}></TextInput>
             <View style={styles.buttonArea}>
                 <SendButton style={styles.saveButton} onPress={closeMessageBox}>CANCEL</SendButton>
                 <SendButton style={styles.saveButton} onPress={saveCustomMessage}>SAVE</SendButton>
@@ -119,7 +119,9 @@ CustomMessageScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
 
-        flex: 1
+        flex: 1,
+        textAlignVertical:'center'
+
     },
     list: {
         padding: 20
@@ -144,6 +146,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 200,
+        width: '90%',
         fontSize: 18
 
     },
