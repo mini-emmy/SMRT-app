@@ -19,13 +19,6 @@ const SarResponseScreen = props => {
         dispatch(settingsActions.getSARnumber());
     }, [dispatch]);
 
-    let customLink;
-    if (Platform.OS === 'android') {
-
-         customLink = <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
-
-     }
-
     const sendSARHandler = () => {
         if (!sarNum) {  
             Alert.alert(
@@ -49,7 +42,7 @@ const SarResponseScreen = props => {
         <View style={styles.sarView}>
             <Input value={eta} onChangeText={(value) => setEta(value)} placeholder="Enter ETA" style={styles.eta} />
             <SendButton onPress={sendSARHandler}>SEND SAR A</SendButton>
-            {customLink}
+            <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
         </View>
     )
 }

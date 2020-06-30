@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 200,
-    fontSize: 18
+    fontSize: 18,
+    width: '90%'
 
   },
   locationMessage: {
