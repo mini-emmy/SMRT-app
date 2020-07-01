@@ -98,7 +98,7 @@ const CustomMessageScreen = props => {
     )
 }
 
-CustomMessageScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
     return {
         headerTitle: 'Custom Response',
         headerRight: () => (

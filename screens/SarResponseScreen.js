@@ -47,7 +47,7 @@ const SarResponseScreen = props => {
     )
 }
 
-SarResponseScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
     return {
         headerTitle: 'SAR Response',
         headerRight: () => (
