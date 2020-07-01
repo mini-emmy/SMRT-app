@@ -5,7 +5,7 @@ import Colors from './constants/colors.js';
 import { enableScreens } from 'react-native-screens';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
-import SarNavigation from './navigation/SarNavigation';
+import MainNavigator from './navigation/SarNavigation';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
@@ -47,7 +47,7 @@ export default function App() {
   }
 
   return     (<Provider store={store}>
-    <SarNavigation/>
+    <MainNavigator/>
     </Provider>)
 
 }

@@ -41,7 +41,7 @@ const SettingsScreen = props => {
   </View>)
 }
 
-SettingsScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
 
   return {
     headerTitle: "Settings"

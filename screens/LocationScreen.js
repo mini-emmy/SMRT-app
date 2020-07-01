@@ -62,7 +62,7 @@ const LocationScreen = props => {
 
 }
 
-LocationScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
   return {
     headerTitle: 'Locate',
     headerRight: () => (
