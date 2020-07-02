@@ -108,7 +108,7 @@ const findWhat3Words = (locArray, message) => {
     do {
         location = regex.exec(message);
         if (location) {
-            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const element = <TouchableOpacity style={styles.block} key={location[0]} onPress={openMappingFromW3W.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
             const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
             locArray.push(address);
         }
@@ -124,7 +124,7 @@ const findGridReference = (locArray, message) => {
     do {
         location = regex.exec(message);
         if (location) {
-            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromGR.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const element = <TouchableOpacity style={styles.block} key={location[0]} onPress={openMappingFromGR.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
             const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
             locArray.push(address);
         }
@@ -138,7 +138,7 @@ findPostCodes = (locArray, message) => {
     do {
         location = regex.exec(message);
         if (location) {
-            const element = <TouchableOpacity key={location[0]} onPress={openMappingFromPostCode.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
+            const element = <TouchableOpacity style={styles.block} key={location[0]} onPress={openMappingFromPostCode.bind(this, location[0])}><Text style={styles.link}>{location[0]}</Text></TouchableOpacity>;
             const address = new Location(message.indexOf(location[0]), message.indexOf(location[0]) + location[0].length, element);
             locArray.push(address);
         }
@@ -149,10 +149,20 @@ findPostCodes = (locArray, message) => {
 
 const styles = StyleSheet.create({
     link: {
-        color: 'red',
+        color: 'black',
         fontFamily: 'open-sans',
         fontSize: 18
 
+    },
+    block:{
+        width:'auto',
+        alignItems: 'center',
+        backgroundColor:"#bce8f1",
+        paddingVertical: 6,
+        paddingHorizontal: 8,
+        borderRadius: 20,
+        marginVertical: 5,
+        marginHorizontal:10
     }
 })
 

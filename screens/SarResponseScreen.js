@@ -13,6 +13,7 @@ import * as settingsActions from '../store/actions/settings';
 const SarResponseScreen = props => {
     const dispatch = useDispatch();
     const [eta, setEta] = useState('');
+    const [info, setInfo] = useState('');
     const sarNum = useSelector(state => state.settings.SARnumber);
 
     useEffect(() => {
@@ -31,16 +32,27 @@ const SarResponseScreen = props => {
             );
         }
 
-        else {           
-            const message = "SAR A " + eta;
-            SendSMS(sarNum, message);
+        else { 
+                    
+            let message = "SAR A";
+            if(eta){
+                message=message+ ' '+eta;
+            }
+            
+            if(info){
+                message=message+' '+info;
+            }
+
+            SendSMS(sarNum, message); 
             setEta('');
+            setInfo('');
         }
     }
 
     return (
         <View style={styles.sarView}>
             <Input value={eta} onChangeText={(value) => setEta(value)} placeholder="Enter ETA" style={styles.eta} />
+            <Input value={info} onChangeText={(value) => setInfo(value)} placeholder="Enter additional info" style={styles.eta} />
             <SendButton onPress={sendSARHandler}>SEND SAR A</SendButton>
             <TouchableOpacity onPress={() => { props.navigation.navigate('Custom') }}><Text>Other messages...</Text></TouchableOpacity>
         </View>
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     eta: {
-        width: '50%'
+        width: '60%'
     }
 }
 );

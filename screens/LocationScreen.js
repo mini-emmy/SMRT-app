@@ -16,15 +16,18 @@ const LocationScreen = props => {
   let locationView = <TextInput multiline={true} value={message} onChangeText={(value) => setMessage(value)} placeholder="Copy and paste message" style={styles.input}></TextInput>;
 
   const findLocations = () => {
-    if(message!==''){
-    Keyboard.dismiss();
-    setShowLocations(true);
+    if (message !== '') {
+      Keyboard.dismiss();
+      setShowLocations(true);
     }
   }
 
-  const clearLocation = () => {
-    Keyboard.dismiss();
+  const clearMessage = () => {
     setMessage('');
+    setShowLocations(false);
+  }
+
+  const editMessage = () => {
     setShowLocations(false);
   }
 
@@ -47,7 +50,7 @@ const LocationScreen = props => {
 
     let lastMessagePart = <Text style={styles.locationMessage} key={start}>{newMessage.substring(start)}</Text>
     locationsSection.push(lastMessagePart);
-    locationView = <View>{locationsSection.map((item) => { return item })}</View>
+    locationView = <View style={styles.message}>{locationsSection.map((item) => { return item })}</View>
 
   }
 
@@ -57,7 +60,10 @@ const LocationScreen = props => {
       {locationView}
     </View>
     <SendButton style={styles.locButton} onPress={findLocations}>Find Locations</SendButton>
-    <SendButton style={styles.locButton} onPress={clearLocation}>Clear</SendButton>
+    <View style={styles.editButtons}>
+      <SendButton style={styles.editButton} onPress={editMessage}>Edit</SendButton>
+      <SendButton style={styles.editButton} onPress={clearMessage}>Clear</SendButton>
+    </View>
   </ScrollView>
 
 }
@@ -80,47 +86,29 @@ export const screenOptions = navData => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  messageCard: {
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: "white",
-    margin: 20,
-    padding: 10
-
-  },
   locButton: {
-    marginHorizontal: 20
+    marginHorizontal: '10%'
   },
-  locations: {
+  editButton:{
+    width:'45%',
+    marginHorizontal:'5%'
+  },
+  editButtons: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
+    marginHorizontal:'10%'
   },
   input: {
     height: 200,
     fontSize: 18,
     width: '90%'
-
+  },
+  message:{
+    minHeight:200
   },
   locationMessage: {
     fontSize: 18
-  },
-  list: {
-    alignItems: 'center',
-    justifyContent: "flex-end",
-    flexGrow: 1
-
   },
   messageCard: {
     justifyContent: 'space-between',

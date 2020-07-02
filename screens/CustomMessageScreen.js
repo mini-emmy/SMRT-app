@@ -118,21 +118,12 @@ export const screenOptions = navData => {
 
 const styles = StyleSheet.create({
     screen: {
-
         flex: 1,
-        textAlignVertical:'center'
-
+        textAlignVertical: 'center'
     },
     list: {
         padding: 20
     },
-    sarView: {
-        height: '100%',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
     messageButton: {
         margin: 0
     },
@@ -160,7 +151,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
 
     },
-
     messageCard: {
         justifyContent: 'space-between',
         alignItems: 'center',

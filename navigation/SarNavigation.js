@@ -66,7 +66,7 @@ const MainNavigator = () => {
                     name="Location"
                     component={LocationNavigatorScreen}
                     options={{
-                        tabBarLabel: 'Location',
+                        tabBarLabel: 'Locate',
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons name='ios-locate' size={25} color={color} />
                         ),
