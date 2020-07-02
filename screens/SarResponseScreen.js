@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     eta: {
-        width: '60%'
+        width: '60%',
+        marginVertical:20
     }
 }
 );
